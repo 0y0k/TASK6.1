@@ -53,17 +53,21 @@ stages {
         }
     }
     post{
-         sucess{
-            emailtext subject: "Pipeline Succeeded.",
-            body: "Pipeline Succeeded. See attached details."
+         success{
+            emailext(
+            subject: "Pipeline Succeeded.",
+            body: "Pipeline Succeeded. See attached details.",
             attachLog: true,
             to: "s221303109@deakin.edu.au"
+            )
          }
-         failture{
-            emailtext subject: "Pipeline Failed.",
-            body: "Pipeline Failed. See attached details."
+         failure{
+            emailext(
+            subject: "Pipeline Failed.",
+            body: "Pipeline Failed. See attached details.",
             attachLog: true,
             to: "s221303109@deakin.edu.au"
+            )
          }
     }
 }
