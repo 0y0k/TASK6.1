@@ -1,0 +1,54 @@
+﻿pipeline {
+	agent any
+	environment {
+		DIRECTORY_PATH = "${WORKSPACE}"
+		TESTING_ENVIRONMENT = 'staging'
+		PRODUCTION_ENVIRONMENT = 'Junyi Yang'
+	}
+
+stages {
+        stage('Build') {
+            steps {
+                echo "Building the code from directory: ${env.DIRECTORY_PATH}"
+                echo "Compiling the code and generating any necessary artifacts"
+            }
+        }        
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Running tests in ${env.TESTING_ENVIRONMENT} environment"
+                echo "Running unit tests"
+                echo "Running integration tests"
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                echo "Task: Analyse the code for quality and industry standards"
+                echo "Tool: SonarQube"
+            }
+	    }
+        stage('Security Scan') {
+            steps {
+                echo "Task: Perform a security scan on the code"
+                echo "Tool: Dependency Check"
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                echo "Task: Deploy the application to staging"
+                echo "Tool: AWS CLI or Jenkins AWS Plugin"
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Task: Run integration tests on the staging environment"
+                echo "Tool: Custom scripts or testing frameworks"
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the code to the production environment (${env.PRODUCTION_ENVIRONMENT})"
+                echo "Tool: AWS CLI or Jenkins AWS Plugin"
+            }
+        }
+    }
+}
