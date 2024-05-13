@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+    options {
+        skipDefaultCheckout()
+    }
 	environment {
 		DIRECTORY_PATH = "${WORKSPACE}"
 		TESTING_ENVIRONMENT = 'staging'
@@ -7,6 +10,20 @@ pipeline {
 	}
 
 stages {
+        stage('Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/0y0k/TASK6.1.git' 
+                    ]]
+                ])
+            }
+        }
         stage('Build') {
             steps {
                 echo "Building the code from directory: ${env.DIRECTORY_PATH}"
