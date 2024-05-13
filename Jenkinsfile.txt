@@ -1,4 +1,4 @@
-﻿pipeline {
+pipeline {
 	agent any
 	environment {
 		DIRECTORY_PATH = "${WORKSPACE}"
@@ -10,6 +10,7 @@ stages {
         stage('Build') {
             steps {
                 echo "Building the code from directory: ${env.DIRECTORY_PATH}"
+                git branch: 'main', url:'https://github.com/0y0k/TASK6.1.git'
                 echo "Compiling the code and generating any necessary artifacts"
             }
         }        
@@ -50,5 +51,19 @@ stages {
                 echo "Tool: AWS CLI or Jenkins AWS Plugin"
             }
         }
+    }
+    post{
+         sucess{
+            emailtext subject: "Pipeline Succeeded.",
+            body: "Pipeline Succeeded. See attached details."
+            attachLog: true,
+            to: "s221303109@deakin.edu.au"
+         }
+         failture{
+            emailtext subject: "Pipeline Failed.",
+            body: "Pipeline Failed. See attached details."
+            attachLog: true,
+            to: "s221303109@deakin.edu.au"
+         }
     }
 }
