@@ -2,7 +2,6 @@ pipeline {
 	agent any
 
 stages {
-        
         stage('Build') {
             steps {
                 echo "Building the code from directory"
@@ -11,7 +10,7 @@ stages {
         }        
         stage('Unit and Integration Tests') {
             steps {
-                echo "Running tests in ${env.TESTING_ENVIRONMENT} environment"
+                echo "Running tests in environment"
                 echo "Running unit tests"
                 echo "Running integration tests"
             }
@@ -42,10 +41,12 @@ stages {
         }
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the code to the production environment (${env.PRODUCTION_ENVIRONMENT})"
+                echo "Deploying the code to the production environment"
                 echo "Tool: AWS CLI or Jenkins AWS Plugin"
             }
-	post{
+        }
+    }
+    post{
          success{
             emailext(
             subject: "Pipeline Succeeded.",
@@ -62,7 +63,5 @@ stages {
             to: "s221303109@deakin.edu.au"
             )
          }
-   	 }
-        }
     }
 }
