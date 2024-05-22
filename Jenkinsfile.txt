@@ -67,9 +67,7 @@ stages {
                 echo "Deploying the code to the production environment (${env.PRODUCTION_ENVIRONMENT})"
                 echo "Tool: AWS CLI or Jenkins AWS Plugin"
             }
-        }
-    }
-    post{
+	post{
          success{
             emailext(
             subject: "Pipeline Succeeded.",
@@ -86,5 +84,7 @@ stages {
             to: "s221303109@deakin.edu.au"
             )
          }
+   	 }
+        }
     }
 }
