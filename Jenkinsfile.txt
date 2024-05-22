@@ -1,33 +1,11 @@
 pipeline {
 	agent any
-    options {
-        skipDefaultCheckout()
-    }
-	environment {
-		DIRECTORY_PATH = "${WORKSPACE}"
-		TESTING_ENVIRONMENT = 'staging'
-		PRODUCTION_ENVIRONMENT = 'Junyi Yang'
-	}
 
 stages {
-        stage('Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [],
-                    submoduleCfg: [],
-                    userRemoteConfigs: [[
-                        url: 'https://github.com/0y0k/TASK6.1.git' 
-                    ]]
-                ])
-            }
-        }
+        
         stage('Build') {
             steps {
-                echo "Building the code from directory: ${env.DIRECTORY_PATH}"
-                git branch: 'main', url:'https://github.com/0y0k/TASK6.1.git'
+                echo "Building the code from directory"
                 echo "Compiling the code and generating any necessary artifacts"
             }
         }        
